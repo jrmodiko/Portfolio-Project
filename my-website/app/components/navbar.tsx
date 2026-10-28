@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -11,7 +12,16 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  // usePathname() requires an active router, which isn't available during
+  // static prerendering/SSR. Defer it to the client so the build can export
+  // pages like /projects/[id] without throwing. Defaulting to "/" keeps the
+  // server-rendered HTML identical to the initial client hydration render,
+  // avoiding a hydration mismatch.
+  const [pathname, setPathname] = useState<string>("/");
+
+  useEffect(() => {
+    setPathname(usePathname());
+  }, []);
 
   return (
     <nav
