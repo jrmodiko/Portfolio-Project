@@ -1,0 +1,54 @@
+[
+  {
+    "id": "portfol-site",
+    "title": "Portfolio Site",
+    "shortDescription": "A modern full-stack developer portfolio with admin CRUD.",
+    "description": "A sleek, responsive portfolio built with Next.js 16, Tailwind CSS v4, and React 19. Features an admin dashboard with full CRUD capabilities for managing projects, plus authentication and a contact form.",
+    "tech": ["Next.js", "Tailwind CSS", "TypeScript", "React"],
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    "githubUrl": "https://github.com/jrmodiko/Portfolio-Project",
+    "liveUrl": "https://portfolio-project-ten-orpin.vercel.app/",
+    "featured": true,
+    "createdAt": "2026-01-10T00:00:00.000Z",
+    "updatedAt": "2026-01-10T00:00:00.000Z"
+  },
+  {
+    "id": "task-manager",
+    "title": "Task Manager",
+    "shortDescription": "Collaborative task management with real-time updates.",
+    "description": "A full-stack task management application featuring drag-and-drop boards, real-time collaboration, user authentication, and role-based access control.",
+    "tech": ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80",
+    "githubUrl": "https://github.com/jrmodiko/Portfolio-Project",
+    "liveUrl": "#",
+    "featured": true,
+    "createdAt": "2026-02-05T00:00:00.000Z",
+    "updatedAt": "2026-02-05T00:00:00.000Z"
+  },
+  {
+    "id": "analytics-dashboard",
+    "title": "Analytics Dashboard",
+    "shortDescription": "Data visualization dashboard with interactive charts.",
+    "description": "An analytics dashboard that visualizes key metrics using interactive charts and graphs. Includes data filtering, date range selection, and export functionality.",
+    "tech": ["React", "Chart.js", "Tailwind CSS", "APIs"],
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    "githubUrl": "https://github.com/jrmodiko/Portfolio-Project",
+    "liveUrl": "#",
+    "featured": false,
+    "createdAt": "2026-03-15T00:00:00.000Z",
+    "updatedAt": "2026-03-15T00:00:00.000Z"
+  },
+  {
+    "id": "rest-api",
+    "title": "RESTful API",
+    "shortDescription": "Secure REST API with role-based access control.",
+    "description": "A production-ready RESTful API built with Node.js and Express. Features JWT authentication, role-based access control, input validation, and PostgreSQL integration.",
+    "tech": ["Node.js", "Express", "PostgreSQL", "JWT"],
+    "image": "https://images.unsplash.com/photo-1544383835-bda2d6d3b77a?auto=format&fit=crop&w=800&q=80",
+    "githubUrl": "https://github.com/jrmodiko/Portfolio-Project",
+    "liveUrl": "#",
+    "featured": false,
+    "createdAt": "2026-04-20T00:00:00.000Z",
+    "updatedAt": "2026-04-20T00:00:00.000Z"
+  }
+]
