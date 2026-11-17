@@ -19,12 +19,12 @@ export default function Admin() {
 
   const form = {
     title: "",
-    shortDescription: "",
-    description: "",
+    summary: "",
     tech: "",
+    order: "0",
+    imageUrl: "",
     githubUrl: "",
     liveUrl: "",
-    featured: "false",
   };
 
   useEffect(() => {
@@ -62,14 +62,18 @@ export default function Admin() {
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
+
+    const links: any[] = [];
+    if (form.githubUrl) links.push({ type: "github", url: form.githubUrl });
+    if (form.liveUrl) links.push({ type: "live", url: form.liveUrl });
+    if (form.imageUrl) links.push({ type: "image", url: form.imageUrl });
+
     const body = {
       title: form.title,
-      short_description: form.shortDescription,
-      description: form.description,
-      tech,
-      github_url: form.githubUrl || undefined,
-      live_url: form.liveUrl || undefined,
-      featured: form.featured === "true",
+      summary: form.summary,
+      tech_stack: tech.join(","),
+      links: links.length > 0 ? links : [],
+      "order": parseInt(form.order) || 0,
     };
 
     try {
@@ -112,12 +116,12 @@ export default function Admin() {
   function resetForm() {
     setEditing(null);
     form.title = "";
-    form.shortDescription = "";
-    form.description = "";
+    form.summary = "";
     form.tech = "";
+    form.order = "0";
+    form.imageUrl = "";
     form.githubUrl = "";
     form.liveUrl = "";
-    form.featured = "false";
   }
 
   if (authLoading || loading) {
@@ -206,6 +210,13 @@ export default function Admin() {
                         <td className="px-6 py-4 text-right">
                           <button
                             onClick={() => {
+                              form.title = p.title;
+                              form.summary = p.shortDescription;
+                              form.tech = p.tech.join(", ");
+                              form.order = String(p.order ?? 0);
+                              form.imageUrl = p.image ?? "";
+                              form.githubUrl = p.githubUrl ?? "";
+                              form.liveUrl = p.liveUrl ?? "";
                               setEditing(p);
                               setMode("form");
                             }}
@@ -257,12 +268,12 @@ export default function Admin() {
                   <label
                     className="block text-xs font-semibold text-muted uppercase tracking-wider mb-1.5"
                   >
-                    Short description
+                    Summary
                   </label>
                   <input
                     className="w-full rounded-xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-all glass-modern"
-                    value={form.shortDescription}
-                    onChange={(e) => (form.shortDescription = e.target.value)}
+                    value={form.summary}
+                    onChange={(e) => (form.summary = e.target.value)}
                     required
                     placeholder="e.g. Modern portfolio with admin CRUD"
                   />
@@ -271,14 +282,27 @@ export default function Admin() {
                   <label
                     className="block text-xs font-semibold text-muted uppercase tracking-wider mb-1.5"
                   >
-                    Description
+                    Order (display position)
                   </label>
-                  <textarea
+                  <input
+                    type="number"
                     className="w-full rounded-xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-all glass-modern"
-                    value={form.description}
-                    onChange={(e) => (form.description = e.target.value)}
-                    rows={3}
-                    required
+                    value={form.order}
+                    onChange={(e) => (form.order = e.target.value)}
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label
+                    className="block text-xs font-semibold text-muted uppercase tracking-wider mb-1.5"
+                  >
+                    Image URL
+                  </label>
+                  <input
+                    className="w-full rounded-xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-all glass-modern"
+                    value={form.imageUrl}
+                    onChange={(e) => (form.imageUrl = e.target.value)}
+                    placeholder="https://images.unsplash.com/..."
                   />
                 </div>
                 <div>
@@ -293,20 +317,6 @@ export default function Admin() {
                     onChange={(e) => (form.tech = e.target.value)}
                     placeholder="e.g. Next.js, Tailwind, TypeScript"
                   />
-                </div>
-                <div className="flex items-center gap-3">
-                  <input
-                    id="featured"
-                    type="checkbox"
-                    className="rounded bg-white/[0.03] border border-white/[0.1] text-primary focus:ring-primary"
-                    checked={form.featured === "true"}
-                    onChange={(e) =>
-                      (form.featured = e.target.checked ? "true" : "false")
-                    }
-                  />
-                  <label htmlFor="featured" className="text-sm text-muted">
-                    Featured project
-                  </label>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
