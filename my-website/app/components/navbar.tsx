@@ -51,12 +51,6 @@ export default function Navbar() {
               <span className="text-xs text-muted animate-pulse twinkle">…</span>
             ) : session ? (
               <div className="flex items-center gap-3">
-                <Link
-                  href="/admin"
-                  className="text-xs font-semibold px-3 py-1.5 rounded-full border border-white/[0.1] text-muted hover:text-foreground hover:bg-white/[0.05] transition-all glass-modern"
-                >
-                  Admin
-                </Link>
                 <span className="text-xs text-muted">
                   {session.user?.email ?? "Admin"}
                 </span>
@@ -67,14 +61,7 @@ export default function Navbar() {
                   Logout
                 </button>
               </div>
-            ) : (
-              <Link
-                href="/admin"
-                className="text-xs font-semibold px-3 py-1.5 rounded-full border border-white/[0.1] text-muted hover:text-foreground hover:bg-white/[0.05] transition-all glass-modern"
-              >
-                Admin Login
-              </Link>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
