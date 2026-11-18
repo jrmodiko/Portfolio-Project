@@ -3,9 +3,10 @@ import { getProject, updateProject, deleteProject } from "@/lib/data";
 
 export async function GET(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const project = await getProject(params.id);
+  const { id } = await params;
+  const project = await getProject(id);
   if (!project) {
     return NextResponse.json({ error: "Project not found" }, { status: 404 });
   }
@@ -14,11 +15,12 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
-    const project = await updateProject(params.id, body);
+    const { id } = await params;
+    const project = await updateProject(id, body);
     if (!project) {
       return NextResponse.json({ error: "Project not found" }, { status: 404 });
     }
@@ -30,9 +32,10 @@ export async function PUT(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const ok = await deleteProject(params.id);
+  const { id } = await params;
+  const ok = await deleteProject(id);
   if (!ok) {
     return NextResponse.json({ error: "Project not found" }, { status: 404 });
   }
